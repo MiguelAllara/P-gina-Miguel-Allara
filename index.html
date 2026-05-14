@@ -338,13 +338,45 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2026 · Todos los derechos reservados.</p>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo-name">Arquisafe</div>
+      <div class="footer-logo-sub">Arquitectura</div>
+      <p class="footer-desc">Estudio de arquitectura con sede en Buenos Aires, Argentina. Av. Mosconi 2615.</p>
+      <p class="footer-desc" style="margin-top:8px;">info@arquisafe.com.ar · +54 11 6926-0039</p>
+    </div>
+    <div class="footer-col">
+      <h5>Navegación</h5>
+      <ul>
+        <li><a href="#hero">Inicio</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#vision">Visión</a></li>
+        <li><a href="#obras">Obras</a></li>
+        <li><a href="#equipo">Equipo</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Legal</h5>
+      <ul>
+        <li><a href="#">Política de privacidad</a></li>
+        <li><a href="#">Términos y condiciones</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Arquisafe. Todos los derechos reservados.</p>
+    <div class="footer-legal">
+      <a href="#">Política de privacidad</a>
+      <a href="#">Términos y condiciones</a>
+    </div>
+  </div>
 </footer>
 
-<div class="wf-badge">Wireframe v0.3</div>
+<div class="wf-badge">Wireframe v0.2</div>
 
 <script>
-  let cur = 0, total = 4;
+  let cur = 0, total = 3;
   const track = document.getElementById('track');
   const dots = document.querySelectorAll('.dot');
   function update() {
