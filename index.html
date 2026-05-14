@@ -6,677 +6,331 @@
 <title>Arquisafe — Arquitectura</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
     --concrete: #b0a89a;
     --concrete-dark: #7a7068;
     --concrete-light: #d6cfc7;
     --bg: #1a1917;
     --bg2: #222120;
+    --bg3: #2a2826;
     --white: #f0ece7;
     --gray: #888078;
     --border: #3a3733;
+    --accent: #7a7068;
   }
-
   html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: var(--bg);
-    color: var(--white);
-    font-size: 16px;
-    line-height: 1.6;
-  }
-
-  /* TEXTURA HORMIGÓN */
-  .concrete-bg {
-    background-color: var(--bg);
-    background-image:
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
-  }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--white); font-size: 16px; line-height: 1.6; }
 
   /* NAV */
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 48px;
-    background: rgba(26,25,23,0.92);
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: flex-start; justify-content: space-between;
+    padding: 16px 40px;
+    background: rgba(26,25,23,0.95);
     backdrop-filter: blur(6px);
     border-bottom: 1px solid var(--border);
   }
-
-  .logo {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.1;
-  }
-  .logo-name {
-    font-size: 1.4rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--white);
-  }
-  .logo-sub {
-    font-size: 0.62rem;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--concrete);
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 32px;
-    list-style: none;
-  }
-  .nav-links a {
-    color: var(--concrete-light);
-    text-decoration: none;
-    font-size: 0.78rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
+  .nav-links { display: flex; gap: 30px; list-style: none; padding-top: 6px; }
+  .nav-links a { color: var(--concrete-light); text-decoration: none; font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; transition: color 0.2s; }
   .nav-links a:hover { color: var(--white); }
-
-  /* HERO */
-  #hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 120px 48px 80px;
-    position: relative;
-    overflow: hidden;
-  }
-  #hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(120deg, rgba(26,25,23,0.85) 60%, rgba(90,80,70,0.3));
-    z-index: 1;
-  }
-  .hero-placeholder-bg {
-    position: absolute; inset: 0;
-    background: repeating-linear-gradient(
-      45deg,
-      #2a2825 0px, #2a2825 2px,
-      #222120 2px, #222120 40px
-    );
-  }
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 640px;
-  }
-  .hero-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: var(--concrete);
-    margin-bottom: 20px;
-  }
-  .hero-title {
-    font-size: clamp(2.2rem, 5vw, 4rem);
-    font-weight: 300;
-    letter-spacing: 0.05em;
-    color: var(--white);
-    margin-bottom: 16px;
-    line-height: 1.15;
-  }
-  .hero-title strong { font-weight: 700; }
-  .hero-sub {
-    color: var(--concrete-light);
-    font-size: 0.95rem;
-    margin-bottom: 40px;
-    max-width: 480px;
+  .logo-placeholder {
+    width: 90px; height: 70px; border: 1px dashed var(--concrete-dark);
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    font-size: 0.5rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--concrete-dark);
   }
 
-  /* FORMULARIO HERO */
-  .hero-form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    max-width: 360px;
-  }
-  .hero-form input {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid var(--border);
-    color: var(--white);
-    padding: 12px 16px;
-    font-size: 0.85rem;
-    letter-spacing: 0.05em;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .hero-form input::placeholder { color: var(--gray); }
-  .hero-form input:focus { border-color: var(--concrete); }
-  .btn {
-    background: var(--concrete-dark);
-    color: var(--white);
-    border: none;
-    padding: 13px 24px;
-    font-size: 0.75rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-  .btn:hover { background: var(--concrete); }
-
-  /* SECCIONES GENERALES */
-  section {
-    padding: 96px 48px;
-    border-top: 1px solid var(--border);
-  }
-  .section-label {
-    font-size: 0.65rem;
-    letter-spacing: 0.45em;
-    text-transform: uppercase;
-    color: var(--concrete);
-    margin-bottom: 12px;
-  }
-  .section-title {
-    font-size: clamp(1.6rem, 3vw, 2.6rem);
-    font-weight: 300;
-    letter-spacing: 0.04em;
-    margin-bottom: 32px;
-    color: var(--white);
-  }
-  .section-title strong { font-weight: 700; }
-  .lorem {
-    color: var(--concrete-light);
-    font-size: 0.9rem;
-    max-width: 660px;
-    line-height: 1.8;
-  }
-
-  /* CARRUSEL */
-  #carousel-section { padding: 0; border-top: 1px solid var(--border); }
-  .carousel {
-    position: relative;
-    width: 100%;
-    height: 520px;
-    overflow: hidden;
-  }
-  .carousel-track {
-    display: flex;
-    height: 100%;
-    transition: transform 0.6s ease;
-  }
+  /* HERO / CARRUSEL */
+  #hero { position: relative; height: 100vh; min-height: 600px; overflow: hidden; padding-top: 102px; }
+  .carousel { position: relative; width: 100%; height: 100%; overflow: hidden; }
+  .carousel-track { display: flex; height: 100%; transition: transform 0.6s ease; }
   .carousel-slide {
-    min-width: 100%;
-    position: relative;
-    background: var(--bg2);
-    display: flex;
-    align-items: flex-end;
+    min-width: 100%; position: relative;
+    background: repeating-linear-gradient(45deg,#2a2825 0,#2a2825 3px,#222120 3px,#222120 36px);
+    display: flex; align-items: center;
   }
   .slide-placeholder {
-    position: absolute; inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.7rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--border);
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--border);
   }
-  .slide-1 { background: repeating-linear-gradient(0deg,#222120 0,#222120 3px,#1a1917 3px,#1a1917 30px); }
-  .slide-2 { background: repeating-linear-gradient(90deg,#222120 0,#222120 3px,#1a1917 3px,#1a1917 30px); }
-  .slide-3 { background: repeating-linear-gradient(45deg,#222120 0,#222120 3px,#1a1917 3px,#1a1917 24px); }
-  .slide-caption {
-    position: relative;
-    z-index: 2;
-    padding: 32px 48px;
-    background: linear-gradient(transparent, rgba(20,19,18,0.9));
-    width: 100%;
+  .hero-overlay {
+    position: relative; z-index: 2;
+    background: rgba(26,25,23,0.55);
+    backdrop-filter: blur(2px);
+    padding: 40px 36px;
+    margin-left: 0;
+    width: 340px;
+    align-self: stretch;
+    display: flex; flex-direction: column; justify-content: flex-start;
+    border-right: 1px solid var(--border);
   }
-  .slide-caption h3 {
-    font-size: 1.1rem;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    color: var(--white);
-  }
-  .slide-caption p {
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
-    color: var(--concrete);
-    text-transform: uppercase;
-    margin-top: 4px;
+  .hero-overlay h2 {
+    font-size: 1rem; font-weight: 400; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--white); line-height: 1.8;
   }
   .carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(26,25,23,0.7);
-    border: 1px solid var(--border);
-    color: var(--white);
-    width: 44px; height: 44px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    z-index: 3;
-    transition: background 0.2s;
-    display: flex; align-items: center; justify-content: center;
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: rgba(26,25,23,0.6); border: 1px solid var(--border); color: var(--white);
+    width: 40px; height: 40px; font-size: 1rem; cursor: pointer; z-index: 5;
+    display: flex; align-items: center; justify-content: center; transition: background 0.2s;
   }
   .carousel-btn:hover { background: rgba(90,80,70,0.5); }
-  .carousel-btn.prev { left: 24px; }
-  .carousel-btn.next { right: 24px; }
-  .carousel-dots {
-    position: absolute;
-    bottom: 20px; right: 48px;
-    display: flex; gap: 8px;
-    z-index: 3;
-  }
-  .dot {
-    width: 6px; height: 6px;
-    background: var(--gray);
-    cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
-  }
-  .dot.active { background: var(--white); transform: scale(1.4); }
+  .carousel-btn.prev { left: 20px; }
+  .carousel-btn.next { right: 20px; }
+  .carousel-dots { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 5; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gray); cursor: pointer; transition: background 0.2s, transform 0.2s; }
+  .dot.active { background: var(--white); transform: scale(1.3); }
 
-  /* QUIÉNES SOMOS */
-  .two-col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    align-items: start;
+  /* WHATSAPP FLOAT */
+  .wsp {
+    position: fixed; right: 22px; bottom: 90px; z-index: 200;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: #25d366; display: flex; align-items: center; justify-content: center;
+    font-size: 0.55rem; color: #fff; text-align: center; letter-spacing: 0.05em;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4); cursor: pointer;
   }
-  .img-placeholder {
-    background: repeating-linear-gradient(
-      135deg,
-      #2a2825 0px, #2a2825 2px,
-      #1f1e1c 2px, #1f1e1c 20px
-    );
+
+  /* SECCIONES */
+  section { padding: 80px 40px; }
+  .section-label { font-size: 1.1rem; font-weight: 400; letter-spacing: 0.25em; text-transform: uppercase; color: var(--white); margin-bottom: 24px; }
+
+  /* ÁREAS */
+  #areas { padding-top: 64px; padding-bottom: 64px; }
+  .areas-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+  .area-card {
+    background: repeating-linear-gradient(90deg,#262422 0,#262422 2px,#222120 2px,#222120 14px);
     border: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--border);
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
+    padding: 32px 28px;
+    display: flex; flex-direction: column;
+    min-height: 320px;
   }
+  .area-card h3 {
+    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--concrete-light); margin-bottom: 20px;
+  }
+  .area-card p { font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray); line-height: 1.9; flex-grow: 1; }
+  .area-link {
+    margin-top: 24px; align-self: stretch; text-align: center;
+    border: 1px solid var(--concrete-dark);
+    padding: 12px; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--concrete); cursor: pointer; transition: all 0.2s; text-decoration: none;
+  }
+  .area-link:hover { background: var(--concrete-dark); color: var(--white); }
 
-  /* VISIÓN */
-  #vision { background: var(--bg2); }
-  .vision-quote {
-    font-size: clamp(1.2rem, 2.5vw, 2rem);
-    font-weight: 300;
-    font-style: italic;
-    color: var(--concrete-light);
-    border-left: 2px solid var(--concrete-dark);
-    padding-left: 32px;
-    margin-bottom: 32px;
-    line-height: 1.5;
-    max-width: 760px;
+  /* TRAYECTORIA */
+  #trayectoria { padding-top: 40px; padding-bottom: 60px; }
+  #trayectoria h2 {
+    font-size: 1.1rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--white); margin-bottom: 16px;
   }
-
-  /* OBRAS */
-  .obras-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    margin-top: 32px;
+  #trayectoria p {
+    font-size: 0.92rem; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--concrete-light); line-height: 1.85; margin-bottom: 16px;
   }
-  .obra-card {
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-  }
-  .obra-img {
-    height: 240px;
-    border: 1px solid var(--border);
-  }
-  .obra-overlay {
-    position: absolute; inset: 0;
-    background: rgba(20,19,18,0.7);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 20px;
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .obra-card:hover .obra-overlay { opacity: 1; }
-  .obra-overlay h4 { font-size: 0.9rem; font-weight: 500; }
-  .obra-overlay span { font-size: 0.68rem; color: var(--concrete); letter-spacing: 0.2em; text-transform: uppercase; }
 
   /* EQUIPO */
-  #equipo { background: var(--bg2); }
-  .equipo-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-    margin-top: 32px;
-  }
-  .miembro {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
+  #equipo { padding-top: 30px; padding-bottom: 50px; }
+  .equipo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-bottom: 40px; }
+  .miembro { display: flex; flex-direction: column; align-items: center; text-align: center; }
   .miembro-foto {
-    width: 100%;
-    aspect-ratio: 3/4;
-    margin-bottom: 16px;
-    border: 1px solid var(--border);
-    filter: grayscale(1) contrast(0.85);
-    background: repeating-linear-gradient(
-      160deg,
-      #2e2c2a 0px, #2e2c2a 2px,
-      #222120 2px, #222120 18px
-    );
+    width: 200px; height: 200px; border-radius: 50%;
+    border: 1px solid var(--concrete-dark);
+    background: repeating-linear-gradient(135deg,#262422 0,#262422 2px,#1f1e1c 2px,#1f1e1c 16px);
     display: flex; align-items: center; justify-content: center;
-    color: var(--border); font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--border); font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 16px; filter: grayscale(1);
   }
-  .miembro h4 { font-size: 0.85rem; font-weight: 600; letter-spacing: 0.1em; margin-bottom: 4px; }
-  .miembro span { font-size: 0.7rem; color: var(--concrete); letter-spacing: 0.15em; text-transform: uppercase; }
+  .miembro .rol { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); margin-bottom: 4px; }
+  .miembro h4 { font-size: 1rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); }
+  .equipo-texto { text-align: center; max-width: 900px; margin: 0 auto; }
+  .equipo-texto h3 {
+    font-size: 1rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--white); margin-bottom: 16px;
+  }
+  .equipo-texto p {
+    font-size: 0.92rem; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--concrete-light); line-height: 1.85;
+  }
 
   /* CONTACTO */
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    margin-top: 32px;
+  #contacto { background: var(--bg2); padding-top: 56px; padding-bottom: 56px; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; align-items: start; }
+  .contact-form { display: flex; flex-direction: column; gap: 12px; }
+  .contact-form input, .contact-form textarea {
+    background: var(--bg3); border: 1px solid var(--border);
+    color: var(--white); padding: 13px 16px; font-size: 0.82rem; outline: none;
+    font-family: inherit; transition: border-color 0.2s; resize: vertical;
   }
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  .contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--gray); }
+  .contact-form input:focus, .contact-form textarea:focus { border-color: var(--concrete); }
+  .contact-form button {
+    background: var(--concrete-dark); color: var(--white); border: none;
+    padding: 14px; font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.2s; margin-top: 4px;
   }
-  .contact-form input,
-  .contact-form textarea {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid var(--border);
-    color: var(--white);
-    padding: 12px 16px;
-    font-size: 0.85rem;
-    outline: none;
-    font-family: inherit;
-    transition: border-color 0.2s;
-    resize: vertical;
+  .contact-form button:hover { background: var(--concrete); }
+  .contact-text h3 {
+    font-size: 0.92rem; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--white); margin-bottom: 14px;
   }
-  .contact-form input::placeholder,
-  .contact-form textarea::placeholder { color: var(--gray); }
-  .contact-form input:focus,
-  .contact-form textarea:focus { border-color: var(--concrete); }
-  .contact-info p {
-    font-size: 0.82rem;
-    color: var(--concrete-light);
-    margin-bottom: 12px;
+  .contact-text p {
+    font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--concrete-light); line-height: 1.85;
   }
-  .contact-info strong {
-    display: block;
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--concrete);
-    margin-bottom: 4px;
+  .contact-data { display: flex; flex-direction: column; gap: 18px; }
+  .contact-data .row { display: flex; align-items: center; gap: 12px; }
+  .contact-data .icon {
+    width: 30px; height: 30px; border: 1px solid var(--concrete-dark); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: var(--concrete); flex-shrink: 0;
   }
+  .contact-data .row span { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--concrete-light); }
   .map-placeholder {
-    height: 200px;
-    margin-top: 24px;
-    border: 1px solid var(--border);
-    background: repeating-linear-gradient(
-      0deg, #222120 0, #222120 2px, #1a1917 2px, #1a1917 20px
-    );
+    margin-top: 8px; height: 160px; border: 1px dashed var(--border);
     display: flex; align-items: center; justify-content: center;
-    color: var(--border); font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--border); font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
   }
 
   /* FOOTER */
-  footer {
-    background: #111110;
-    border-top: 1px solid var(--border);
-    padding: 48px 48px 28px;
-  }
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 48px;
-    margin-bottom: 40px;
-  }
-  .footer-logo-name {
-    font-size: 1.1rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--white);
-    margin-bottom: 4px;
-  }
-  .footer-logo-sub {
-    font-size: 0.58rem;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: var(--concrete);
-    margin-bottom: 16px;
-  }
-  .footer-desc {
-    font-size: 0.78rem;
-    color: var(--gray);
-    line-height: 1.7;
-  }
-  .footer-col h5 {
-    font-size: 0.65rem;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--concrete);
-    margin-bottom: 16px;
-  }
-  .footer-col ul { list-style: none; }
-  .footer-col ul li {
-    font-size: 0.8rem;
-    color: var(--gray);
-    margin-bottom: 8px;
-  }
-  .footer-col ul li a {
-    color: var(--gray);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .footer-col ul li a:hover { color: var(--white); }
-  .footer-bottom {
-    border-top: 1px solid var(--border);
-    padding-top: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .footer-bottom p {
-    font-size: 0.7rem;
-    color: var(--gray);
-    letter-spacing: 0.08em;
+  footer { background: #000; padding: 20px 40px; }
+  footer p {
+    text-align: center; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray);
   }
 
-  /* WIREFRAME BADGE */
   .wf-badge {
-    position: fixed;
-    bottom: 20px; right: 20px;
-    background: rgba(176,168,154,0.15);
-    border: 1px solid var(--concrete-dark);
-    color: var(--concrete);
-    font-size: 0.6rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    padding: 6px 12px;
-    z-index: 999;
+    position: fixed; bottom: 20px; left: 20px;
+    background: rgba(176,168,154,0.12); border: 1px solid var(--concrete-dark);
+    color: var(--concrete); font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; padding: 6px 12px; z-index: 999;
   }
 </style>
 </head>
-<body class="concrete-bg">
+<body>
 
 <!-- NAV -->
 <nav>
-  <div class="logo">
-    <span class="logo-name">Arquisafe</span>
-    <span class="logo-sub">Arquitectura</span>
-  </div>
   <ul class="nav-links">
+    <li><a href="#hero">Inicio</a></li>
+    <li><a href="#areas">Áreas</a></li>
     <li><a href="#nosotros">Nosotros</a></li>
-    <li><a href="#obras">Obras</a></li>
-    <li><a href="#equipo">Equipo</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
+  <div class="logo-placeholder">Logo<br>placeholder</div>
 </nav>
 
-<!-- HERO -->
+<!-- HERO / CARRUSEL -->
 <section id="hero">
-  <div class="hero-placeholder-bg"></div>
-  <div class="hero-content">
-    <p class="hero-label">Estudio de Arquitectura · Buenos Aires</p>
-    <h1 class="hero-title"><strong>Arquisafe</strong><br>Arquitectura de precisión</h1>
-    <p class="hero-sub lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-    <div class="hero-form">
-      <input type="text" placeholder="Nombre completo">
-      <input type="email" placeholder="Correo electrónico">
-      <input type="tel" placeholder="Teléfono (opcional)">
-      <button class="btn">Solicitar contacto</button>
-    </div>
-  </div>
-</section>
-
-<!-- CARRUSEL -->
-<section id="carousel-section">
   <div class="carousel">
     <div class="carousel-track" id="track">
-      <div class="carousel-slide slide-1">
+      <div class="carousel-slide">
         <div class="slide-placeholder">[ Imagen obra 01 — placeholder ]</div>
-        <div class="slide-caption">
-          <h3>Obra 01 — Lorem Ipsum</h3>
-          <p>Residencial · 2024</p>
+        <div class="hero-overlay">
+          <h2>Quiénes somos<br>En Arquisafe .......</h2>
         </div>
       </div>
-      <div class="carousel-slide slide-2">
+      <div class="carousel-slide">
         <div class="slide-placeholder">[ Imagen obra 02 — placeholder ]</div>
-        <div class="slide-caption">
-          <h3>Obra 02 — Lorem Ipsum</h3>
-          <p>Comercial · 2023</p>
+        <div class="hero-overlay">
+          <h2>Quiénes somos<br>En Arquisafe .......</h2>
         </div>
       </div>
-      <div class="carousel-slide slide-3">
+      <div class="carousel-slide">
         <div class="slide-placeholder">[ Imagen obra 03 — placeholder ]</div>
-        <div class="slide-caption">
-          <h3>Obra 03 — Lorem Ipsum</h3>
-          <p>Institucional · 2022</p>
+        <div class="hero-overlay">
+          <h2>Quiénes somos<br>En Arquisafe .......</h2>
+        </div>
+      </div>
+      <div class="carousel-slide">
+        <div class="slide-placeholder">[ Imagen obra 04 — placeholder ]</div>
+        <div class="hero-overlay">
+          <h2>Quiénes somos<br>En Arquisafe .......</h2>
         </div>
       </div>
     </div>
-    <button class="carousel-btn prev" onclick="move(-1)">&#8592;</button>
-    <button class="carousel-btn next" onclick="move(1)">&#8594;</button>
+    <button class="carousel-btn prev" onclick="move(-1)">&#8249;</button>
+    <button class="carousel-btn next" onclick="move(1)">&#8250;</button>
     <div class="carousel-dots" id="dots">
       <div class="dot active" onclick="goTo(0)"></div>
       <div class="dot" onclick="goTo(1)"></div>
       <div class="dot" onclick="goTo(2)"></div>
+      <div class="dot" onclick="goTo(3)"></div>
     </div>
   </div>
 </section>
 
-<!-- QUIÉNES SOMOS -->
+<!-- WHATSAPP -->
+<div class="wsp">WSP</div>
+
+<!-- ÁREAS -->
+<section id="areas">
+  <div class="areas-grid">
+    <div class="area-card">
+      <h3>Área Proyectos</h3>
+      <p>Descripción de cómo pensamos nuestros proyectos...</p>
+      <a href="#" class="area-link">Link a Proyectos</a>
+    </div>
+    <div class="area-card">
+      <h3>Área Obras</h3>
+      <p>Descripción de cómo ejecutamos las obras que nos encomiendan...</p>
+      <a href="#" class="area-link">Link a Obras</a>
+    </div>
+    <div class="area-card">
+      <h3>Área Servicios</h3>
+      <p>Descripción de cuáles son los servicios que ofrecemos...</p>
+      <a href="#" class="area-link">Link a Servicios</a>
+    </div>
+  </div>
+</section>
+
+<!-- TRAYECTORIA -->
 <section id="nosotros">
-  <div class="two-col">
-    <div>
-      <p class="section-label">01 — Nosotros</p>
-      <h2 class="section-title">Quiénes<br><strong>somos</strong></h2>
-      <p class="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <br>
-      <p class="lorem">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
-    </div>
-    <div class="img-placeholder" style="min-height:340px;">[ Imagen — placeholder ]</div>
-  </div>
-</section>
-
-<!-- VISIÓN -->
-<section id="vision">
-  <p class="section-label">02 — Filosofía</p>
-  <h2 class="section-title">Nuestra<br><strong>visión</strong></h2>
-  <div class="vision-quote">
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna."
-  </div>
-  <p class="lorem">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-</section>
-
-<!-- OBRAS -->
-<section id="obras">
-  <p class="section-label">03 — Portfolio</p>
-  <h2 class="section-title">Nuestras<br><strong>obras</strong></h2>
-  <div class="obras-grid">
-    <div class="obra-card">
-      <div class="obra-img img-placeholder" style="background:repeating-linear-gradient(45deg,#2a2825 0,#2a2825 2px,#1a1917 2px,#1a1917 18px);">[ Obra 01 ]</div>
-      <div class="obra-overlay"><h4>Lorem Ipsum</h4><span>Residencial · 2024</span></div>
-    </div>
-    <div class="obra-card">
-      <div class="obra-img img-placeholder" style="background:repeating-linear-gradient(0deg,#2a2825 0,#2a2825 2px,#1a1917 2px,#1a1917 18px);">[ Obra 02 ]</div>
-      <div class="obra-overlay"><h4>Lorem Ipsum</h4><span>Comercial · 2023</span></div>
-    </div>
-    <div class="obra-card">
-      <div class="obra-img img-placeholder" style="background:repeating-linear-gradient(90deg,#2a2825 0,#2a2825 2px,#1a1917 2px,#1a1917 18px);">[ Obra 03 ]</div>
-      <div class="obra-overlay"><h4>Lorem Ipsum</h4><span>Institucional · 2022</span></div>
-    </div>
-    <div class="obra-card">
-      <div class="obra-img img-placeholder" style="background:repeating-linear-gradient(135deg,#2a2825 0,#2a2825 2px,#1a1917 2px,#1a1917 18px);">[ Obra 04 ]</div>
-      <div class="obra-overlay"><h4>Lorem Ipsum</h4><span>Residencial · 2022</span></div>
-    </div>
-    <div class="obra-card">
-      <div class="obra-img img-placeholder" style="background:repeating-linear-gradient(45deg,#222120 0,#222120 2px,#1a1917 2px,#1a1917 12px);">[ Obra 05 ]</div>
-      <div class="obra-overlay"><h4>Lorem Ipsum</h4><span>Urbano · 2021</span></div>
-    </div>
-    <div class="obra-card">
-      <div class="obra-img img-placeholder" style="background:repeating-linear-gradient(0deg,#222120 0,#222120 2px,#1a1917 2px,#1a1917 12px);">[ Obra 06 ]</div>
-      <div class="obra-overlay"><h4>Lorem Ipsum</h4><span>Comercial · 2021</span></div>
-    </div>
+  <div id="trayectoria">
+    <h2>Nuestra Trayectoria</h2>
+    <p>Somos un equipo interdisciplinario de profesionales apasionados por la arquitectura, con una trayectoria sólida de más de 20 años transformando visiones en realidades constructivas. A lo largo de estas dos décadas, hemos materializado una vasta diversidad de proyectos y obras, consolidando un estándar de calidad y compromiso que nos define en cada etapa del proceso arquitectónico.</p>
+    <p>Nuestra experiencia no es solo un registro de metros cuadrados construidos, sino el respaldo fundamental que nos permite encarar cada nuevo desafío con solvencia técnica e innovación. Hoy, esa red de proyectos ejecutados y la satisfacción de nuestros clientes son la base sobre la cual proyectamos Arquisafe, listos para liderar tu próxima obra con la seguridad que solo el tiempo y la práctica profesional pueden brindar.</p>
   </div>
 </section>
 
 <!-- EQUIPO -->
 <section id="equipo">
-  <p class="section-label">04 — Personas</p>
-  <h2 class="section-title">Nuestro<br><strong>equipo</strong></h2>
   <div class="equipo-grid">
     <div class="miembro">
       <div class="miembro-foto">[ Foto ]</div>
-      <h4>Lorem Ipsum</h4>
-      <span>Director / Fundador</span>
+      <p class="rol">Socio Fundador</p>
+      <h4>Arq. Arturo De La Fuente</h4>
     </div>
     <div class="miembro">
       <div class="miembro-foto">[ Foto ]</div>
-      <h4>Lorem Ipsum</h4>
-      <span>Arquitecta Senior</span>
+      <p class="rol">Socio Fundador</p>
+      <h4>Arq. Miguel Allara</h4>
     </div>
     <div class="miembro">
       <div class="miembro-foto">[ Foto ]</div>
-      <h4>Lorem Ipsum</h4>
-      <span>Diseño de Interiores</span>
+      <p class="rol">Socio Fundador</p>
+      <h4>Arq. Laura Gonzalez</h4>
     </div>
-    <div class="miembro">
-      <div class="miembro-foto">[ Foto ]</div>
-      <h4>Lorem Ipsum</h4>
-      <span>Gestión de Proyectos</span>
-    </div>
+  </div>
+  <div class="equipo-texto">
+    <h3>El equipo detrás de Arquisafe</h3>
+    <p>Detrás de cada plano y de cada muro levantado, hay una visión compartida y un compromiso personal con la excelencia. Arquisafe está impulsado por tres profesionales que combinan sus trayectorias individuales para ofrecer una mirada integral en cada proyecto. Creemos en la dirección de obra cercana y en la gestión transparente, asegurando que la experiencia técnica de nuestro equipo sea el motor que convierta tus ideas en espacios habitables y seguros.</p>
   </div>
 </section>
 
 <!-- CONTACTO -->
 <section id="contacto">
-  <p class="section-label">05 — Contacto</p>
-  <h2 class="section-title">Hablemos de<br><strong>tu proyecto</strong></h2>
   <div class="contact-grid">
     <div class="contact-form">
       <input type="text" placeholder="Nombre completo">
       <input type="email" placeholder="Correo electrónico">
-      <input type="tel" placeholder="Teléfono">
-      <input type="text" placeholder="Tipo de proyecto">
-      <textarea rows="5" placeholder="Contanos sobre tu proyecto..."></textarea>
-      <button class="btn">Enviar consulta</button>
+      <input type="tel" placeholder="Teléfono (opcional)">
+      <textarea rows="4" placeholder="Mensaje (opcional)"></textarea>
+      <button>Iniciar mi proyecto</button>
     </div>
-    <div class="contact-info">
-      <p><strong>Dirección</strong>Lorem ipsum 1234, Buenos Aires, Argentina</p>
-      <p><strong>Email</strong>contacto@arquisafe.com.ar</p>
-      <p><strong>Teléfono</strong>+54 11 0000-0000</p>
-      <p><strong>Horario</strong>Lun–Vie · 09:00 a 18:00</p>
+    <div class="contact-text">
+      <h3>¿Tienes un proyecto en mente?</h3>
+      <p>En Arquisafe transformamos tus ideas en realidades tangibles. Ya sea una consulta técnica sobre arquitectura o el inicio de una nueva obra, nuestro equipo está listo para asesorarte. Completá el formulario y nos pondremos en contacto contigo a la brevedad para coordinar una primera reunión.</p>
+    </div>
+    <div class="contact-data">
+      <div class="row"><div class="icon">◉</div><span>Buenos Aires</span></div>
+      <div class="row"><div class="icon">✆</div><span>+(54)11-6926-0039</span></div>
+      <div class="row"><div class="icon">✉</div><span>info@arquisafe.com.ar</span></div>
       <div class="map-placeholder">[ Mapa — placeholder ]</div>
     </div>
   </div>
@@ -684,60 +338,21 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-grid">
-    <div>
-      <div class="footer-logo-name">Arquisafe</div>
-      <div class="footer-logo-sub">Arquitectura</div>
-      <p class="footer-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Estudio de arquitectura con sede en Buenos Aires.</p>
-    </div>
-    <div class="footer-col">
-      <h5>Navegación</h5>
-      <ul>
-        <li><a href="#nosotros">Nosotros</a></li>
-        <li><a href="#vision">Visión</a></li>
-        <li><a href="#obras">Obras</a></li>
-        <li><a href="#equipo">Equipo</a></li>
-        <li><a href="#contacto">Contacto</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h5>Contacto</h5>
-      <ul>
-        <li>Lorem ipsum 1234</li>
-        <li>Buenos Aires, Argentina</li>
-        <li>contacto@arquisafe.com.ar</li>
-        <li>+54 11 0000-0000</li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2026 Arquisafe. Todos los derechos reservados.</p>
-    <p>Diseño & Desarrollo — [Pendiente]</p>
-  </div>
+  <p>© 2026 · Todos los derechos reservados.</p>
 </footer>
 
-<div class="wf-badge">Wireframe v0.1</div>
+<div class="wf-badge">Wireframe v0.3</div>
 
 <script>
-  let cur = 0;
-  const total = 3;
+  let cur = 0, total = 4;
   const track = document.getElementById('track');
   const dots = document.querySelectorAll('.dot');
-
   function update() {
     track.style.transform = `translateX(-${cur * 100}%)`;
     dots.forEach((d, i) => d.classList.toggle('active', i === cur));
   }
-  function move(dir) {
-    cur = (cur + dir + total) % total;
-    update();
-  }
-  function goTo(i) {
-    cur = i;
-    update();
-  }
-
-  // Autoplay
+  function move(dir) { cur = (cur + dir + total) % total; update(); }
+  function goTo(i) { cur = i; update(); }
   setInterval(() => move(1), 5000);
 </script>
 </body>
