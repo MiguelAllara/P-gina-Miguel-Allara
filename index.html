@@ -36,13 +36,13 @@
   /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: flex-start; justify-content: space-between;
+    display: flex; align-items: center; justify-content: space-between;
     padding: 16px 40px;
     background: rgba(58,58,58,0.96);
     backdrop-filter: blur(6px);
     border-bottom: 1px solid var(--border);
   }
-  .nav-links { display: flex; gap: 42px; list-style: none; padding-top: 6px; }
+  .nav-links { display: flex; gap: 42px; list-style: none; align-items: center; }
   .nav-links a { color: var(--white-soft); text-decoration: none; font-size: 1rem; letter-spacing: 0.45em; text-transform: uppercase; transition: color 0.2s; font-family: 'BankGothic Lt BT', 'Science Gothic', sans-serif; padding: 0 4px; }
   .nav-links a:hover { color: var(--accent); }
   .logo-placeholder {
@@ -50,6 +50,11 @@
     display: flex; align-items: center; justify-content: center;
     overflow: hidden;
     color: var(--white);
+  }
+  .logo-placeholder img {
+    max-width: 100%; max-height: 100%;
+    object-fit: contain;
+    filter: invert(1) brightness(1.15);
   }
   .logo-placeholder svg {
     width: 100%; height: 100%;
@@ -270,36 +275,7 @@
     <li><a href="#contacto">Contacto</a></li>
   </ul>
   <div class="logo-placeholder">
-    <svg viewBox="0 0 1154 866" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-      <path d="M 440 10
-               L 50 850
-               L 320 850
-               L 380 720
-               L 720 720
-               L 720 555
-               L 455 555
-               L 565 320
-               L 720 555
-               L 720 380
-               L 600 130
-               Z" />
-      <path d="M 720 720
-               L 720 850
-               L 1110 850
-               L 950 555
-               L 720 555
-               Z" />
-      <path d="M 588 0
-               L 588 175
-               L 945 175
-               L 945 0
-               Z" />
-      <path d="M 945 0
-               L 945 380
-               L 1090 380
-               L 1090 110
-               Z" />
-    </svg>
+    <img src="logo.gif" alt="Arquisafe" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
     <div class="fallback" style="display:none;">Logo</div>
   </div>
 </nav>
