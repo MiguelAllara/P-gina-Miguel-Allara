@@ -42,11 +42,22 @@
     backdrop-filter: blur(6px);
     border-bottom: 1px solid var(--border);
   }
-  .nav-links { display: flex; gap: 30px; list-style: none; padding-top: 6px; }
-  .nav-links a { color: var(--white-soft); text-decoration: none; font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; transition: color 0.2s; font-family: 'BankGothic Lt BT', 'Science Gothic', sans-serif; }
+  .nav-links { display: flex; gap: 42px; list-style: none; padding-top: 6px; }
+  .nav-links a { color: var(--white-soft); text-decoration: none; font-size: 0.78rem; letter-spacing: 0.45em; text-transform: uppercase; transition: color 0.2s; font-family: 'BankGothic Lt BT', 'Science Gothic', sans-serif; padding: 0 4px; }
   .nav-links a:hover { color: var(--accent); }
   .logo-placeholder {
-    width: 90px; height: 70px; border: 1px dashed var(--gray);
+    width: 80px; height: 70px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    color: var(--white);
+  }
+  .logo-placeholder svg {
+    width: 100%; height: 100%;
+    display: block;
+  }
+  .logo-placeholder .fallback {
+    border: 1px dashed var(--gray);
+    width: 100%; height: 100%;
     display: flex; align-items: center; justify-content: center; text-align: center;
     font-size: 0.5rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray);
   }
@@ -101,11 +112,13 @@
   }
   .carousel-btn {
     position: absolute; top: 50%; transform: translateY(-50%);
-    background: rgba(46,46,46,0.7); border: 1px solid var(--border); color: var(--white);
-    width: 40px; height: 40px; font-size: 1rem; cursor: pointer; z-index: 5;
-    display: flex; align-items: center; justify-content: center; transition: background 0.2s;
+    background: rgba(46,46,46,0.6); border: 1px solid rgba(255,255,255,0.4); color: var(--white);
+    width: 48px; height: 48px; border-radius: 50%;
+    font-size: 1.2rem; cursor: pointer; z-index: 5;
+    display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+    backdrop-filter: blur(4px);
   }
-  .carousel-btn:hover { background: var(--accent); color: #1a1a1a; border-color: var(--accent); }
+  .carousel-btn:hover { background: var(--accent); color: #1a1a1a; border-color: var(--accent); transform: translateY(-50%) scale(1.08); }
   .carousel-btn.prev { left: 20px; }
   .carousel-btn.next { right: 20px; }
   .carousel-dots { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 5; }
@@ -256,7 +269,39 @@
     <li><a href="#nosotros">Nosotros</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
-  <div class="logo-placeholder">Logo<br>placeholder</div>
+  <div class="logo-placeholder">
+    <svg viewBox="0 0 1154 866" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+      <path d="M 440 10
+               L 50 850
+               L 320 850
+               L 380 720
+               L 720 720
+               L 720 555
+               L 455 555
+               L 565 320
+               L 720 555
+               L 720 380
+               L 600 130
+               Z" />
+      <path d="M 720 720
+               L 720 850
+               L 1110 850
+               L 950 555
+               L 720 555
+               Z" />
+      <path d="M 588 0
+               L 588 175
+               L 945 175
+               L 945 0
+               Z" />
+      <path d="M 945 0
+               L 945 380
+               L 1090 380
+               L 1090 110
+               Z" />
+    </svg>
+    <div class="fallback" style="display:none;">Logo</div>
+  </div>
 </nav>
 
 <!-- HERO / CARRUSEL -->
@@ -432,11 +477,6 @@
     update(true);
     setTimeout(() => { isAnimating = false; }, 620);
   }
-
-  setInterval(() => move(1), 5000);
-</script>
-</body>
-</html>
 
   setInterval(() => move(1), 5000);
 </script>
