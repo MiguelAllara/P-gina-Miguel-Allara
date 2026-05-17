@@ -43,7 +43,7 @@
     border-bottom: 1px solid var(--border);
   }
   .nav-links { display: flex; gap: 42px; list-style: none; align-items: center; }
-  .nav-links a { color: var(--white-soft); text-decoration: none; font-size: 1rem; letter-spacing: 0.45em; text-transform: uppercase; transition: color 0.2s; font-family: 'BankGothic Lt BT', 'Science Gothic', sans-serif; padding: 0 4px; }
+  .nav-links a { color: var(--white-soft); text-decoration: none; font-size: 0.88rem; letter-spacing: 0.45em; text-transform: uppercase; transition: color 0.2s; font-family: 'BankGothic Lt BT', 'Science Gothic', sans-serif; padding: 0 4px; }
   .nav-links a:hover { color: var(--accent); }
   .logo-placeholder {
     width: 80px; height: 70px;
@@ -85,7 +85,7 @@
   /* Oscurecedor sobre las imágenes para legibilidad del texto */
   .hero-shade {
     position: absolute; inset: 0; z-index: 3;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.35);
     pointer-events: none;
   }
   .hero-overlay {
@@ -394,6 +394,8 @@
 <footer>
   <p>© 2026 · Todos los derechos reservados.</p>
 </footer>
+
+<div class="wf-badge" style="display:none;">Wireframe v0.3</div>
 
 <script>
   const total = 4;          // slides visibles (sin contar clon)
