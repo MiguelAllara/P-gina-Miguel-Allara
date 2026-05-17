@@ -69,7 +69,7 @@
   /* Oscurecedor sobre las imágenes para legibilidad del texto */
   .hero-shade {
     position: absolute; inset: 0; z-index: 3;
-    background: linear-gradient(180deg, rgba(26,26,26,0.55) 0%, rgba(26,26,26,0.35) 50%, rgba(26,26,26,0.6) 100%);
+    background: rgba(0,0,0,0.5);
     pointer-events: none;
   }
   .hero-overlay {
@@ -268,7 +268,7 @@
       <div class="carousel-slide" style="background-image:url('3.jpg');"></div>
       <div class="carousel-slide" style="background-image:url('1.jpeg');"></div>
       <!-- clon del primer slide para loop infinito (no contado en dots) -->
-      <div class="carousel-slide clone" style="background-image:url('obra-1.jpg');"></div>
+      <div class="carousel-slide clone" style="background-image:url('1.jpeg');"></div>
     </div>
     <div class="hero-shade"></div>
     <button class="carousel-btn prev" onclick="move(-1)">&#8249;</button>
@@ -283,7 +283,7 @@
   <div class="hero-overlay">
     <h1 class="brand-name">Arquisafe</h1>
     <div class="brand-accent"></div>
-    <p class="brand-slogan">Proyectamos soluciones,<br>construimos confianza.</p>
+    <p class="brand-slogan">Proyectamos <span style="color:var(--accent);">soluciones</span>,<br>construimos <span style="color:var(--accent);">confianza</span>.</p>
   </div>
 </section>
 
@@ -436,4 +436,4 @@
   setInterval(() => move(1), 5000);
 </script>
 </body>
-</html>>
+</html>
